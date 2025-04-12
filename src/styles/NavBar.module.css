@@ -1,0 +1,78 @@
+.navbar {
+    background-color: var(--card-bg);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    color: var(--text);
+  }
+  
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .logo {
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: var(--link);
+    text-decoration: none;
+  }
+  
+  .brand {
+    color: var(--text);
+  }
+  
+  .link {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+  }
+  
+  .link:hover {
+    color: var(--link-hover);
+  }
+  
+  .user {
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  
+  .logout {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .logout:hover {
+    background-color: var(--link-hover);
+  }
+  
+  .themeToggle {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    transition: transform 0.2s ease;
+    color: var(--text);
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  
+  .themeToggle:hover {
+    transform: scale(1.15);
+  }

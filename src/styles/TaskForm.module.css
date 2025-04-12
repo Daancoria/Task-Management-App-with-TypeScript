@@ -1,0 +1,42 @@
+.form {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+    color: var(--text);
+  }
+  
+  .input,
+  .textarea,
+  .select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-size: 1rem;
+    background-color: var(--card-bg);
+    color: var(--text);
+  }
+  
+  .input[type="date"] {
+    color: var(--text);
+  }
+  
+  .button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .button:hover {
+    background-color: var(--link-hover);
+  }
+  

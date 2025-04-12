@@ -1,0 +1,132 @@
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+  
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .button,
+  .clear {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .clear {
+    background-color: #e53935;
+    color: #fff;
+  }
+  
+  .clear:hover {
+    background-color: #c62828;
+  }
+  
+  .controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .search {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background-color: var(--card-bg);
+    color: var(--text);
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .taskList {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+    width: 100%;
+  }
+  
+  .taskItem {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text);
+  }
+  
+  .taskTitle {
+    font-weight: 600;
+    color: var(--link);
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  
+  .meta {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+  
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .overdue {
+    color: #d32f2f;
+    font-weight: bold;
+  }
+  
+  /* Priority Tags */
+  .priority {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-transform: capitalize;
+    margin-left: 0.5rem;
+  }
+  
+  .priority-low {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .priority-medium {
+    background-color: #fffde7;
+    color: #f9a825;
+  }
+  
+  .priority-high {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
