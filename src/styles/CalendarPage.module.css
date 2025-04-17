@@ -1,0 +1,244 @@
+/* Container styling for the calendar page */
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+/* Header section styling */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+/* Title styling */
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Button and clear button styling */
+.button,
+.clear {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect for buttons */
+.button:hover {
+    background-color: var(--button-hover-bg, #4caf50);
+    color: var(--button-hover-text, #fff);
+}
+
+/* Clear button specific styling */
+.clear {
+    background-color: #e53935;
+    color: #fff;
+}
+
+.clear:hover {
+    background-color: #c62828;
+}
+
+/* Controls section for filters and search */
+.controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Search input styling */
+.search {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background-color: var(--card-bg);
+    color: var(--text);
+    flex: 1;
+    min-width: 200px;
+    transition: border 0.2s ease;
+}
+
+.search:focus {
+    outline: none;
+    border-color: var(--accent, #4caf50);
+}
+
+/* Dropdown (select) styling */
+.controls select {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background-color: var(--card-bg);
+    color: var(--text);
+    min-width: 160px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.controls select:hover {
+    background-color: var(--hover-bg, #f0f0f0);
+    border-color: var(--accent, #4caf50);
+}
+
+/* Task list styling */
+.taskList {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+/* Individual task item styling */
+.taskItem {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.taskItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Task title styling */
+.taskTitle {
+    font-weight: 600;
+    color: var(--link);
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+/* Metadata styling for tasks */
+.meta {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text);
+}
+
+/* Actions section for task buttons */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.actions button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.actions button:hover {
+    color: var(--accent, #4caf50);
+}
+
+/* Styling for overdue tasks */
+.overdue {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+/* Priority tags styling */
+.priority {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-transform: capitalize;
+    margin-left: 0.5rem;
+}
+
+.priority-low {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.priority-medium {
+    background-color: #fffde7;
+    color: #f9a825;
+}
+
+.priority-high {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* Floating action menu styling */
+.floatingMenu {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    z-index: 1000;
+}
+
+/* Main floating action button styling */
+.fabMain {
+    background-color: var(--accent, #4caf50);
+    color: #fff;
+    font-size: 2rem;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.fabMain:hover {
+    transform: rotate(45deg);
+}
+
+/* Floating action menu options styling */
+.fabOption {
+    background-color: var(--button-bg, #fff);
+    color: var(--text);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.fabOption:hover {
+    background-color: var(--button-hover-bg, #eee);
+}

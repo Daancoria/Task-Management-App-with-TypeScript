@@ -1,0 +1,52 @@
+/* Root container styling */
+#root {
+  max-width: 1280px; /* Limit the maximum width of the container */
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 2rem; /* Add padding around the content */
+  text-align: center; /* Center-align the text */
+}
+
+/* Logo styling */
+.logo {
+  height: 6em; /* Set the height of the logo */
+  padding: 1.5em; /* Add padding around the logo */
+  will-change: filter; /* Optimize for filter changes */
+  transition: filter 300ms; /* Smooth transition for filter effects */
+}
+
+/* Hover effect for the logo */
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa); /* Add a glowing shadow effect */
+}
+
+/* Hover effect for React-specific logo */
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa); /* Add a React-themed glowing shadow */
+}
+
+/* Keyframes for spinning animation */
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg); /* Start at 0 degrees */
+  }
+  to {
+    transform: rotate(360deg); /* Rotate a full circle */
+  }
+}
+
+/* Apply spinning animation to the second logo if motion preference allows */
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear; /* Infinite spinning animation */
+  }
+}
+
+/* Card styling */
+.card {
+  padding: 2em; /* Add padding inside the card */
+}
+
+/* Styling for "read the docs" text */
+.read-the-docs {
+  color: #888; /* Set a muted gray color for the text */
+}

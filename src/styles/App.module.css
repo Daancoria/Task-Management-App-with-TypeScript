@@ -1,0 +1,35 @@
+/* Define light theme variables */
+:root {
+    --bg: #f5f7fa; /* Background color */
+    --text: #333; /* Text color */
+    --card-bg: #fff; /* Card background color */
+    --link: #1976d2; /* Link color */
+}
+
+/* Define dark theme variables */
+.dark {
+    --bg: #1e1e2f; /* Background color for dark mode */
+    --text: #e0e0e0; /* Text color for dark mode */
+    --card-bg: #2a2a3d; /* Card background color for dark mode */
+    --link: #90caf9; /* Link color for dark mode */
+}
+
+/* Apply background and text colors to the body */
+body {
+    background-color: var(--bg); /* Use the background color variable */
+    color: var(--text); /* Use the text color variable */
+}
+
+/* Style for links */
+a {
+    color: var(--link); /* Use the link color variable */
+}
+
+/* Style for form elements (input, select, textarea) */
+input,
+select,
+textarea {
+    background: var(--card-bg); /* Use the card background color variable */
+    color: var(--text); /* Use the text color variable */
+    border: 1px solid #444; /* Add a border with a dark shade */
+}

@@ -1,0 +1,46 @@
+/* Form container styling */
+.form {
+    max-width: 600px; /* Limit the width of the form */
+    margin: 2rem auto; /* Center the form with vertical spacing */
+    background: var(--card-bg); /* Background color from theme */
+    padding: 2rem; /* Add padding inside the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: var(--text); /* Text color from theme */
+}
+
+/* Input, textarea, and select field styling */
+.input,
+.textarea,
+.select {
+    width: 100%; /* Full width of the container */
+    padding: 0.75rem; /* Padding inside the fields */
+    margin-bottom: 1rem; /* Space below each field */
+    border-radius: 6px; /* Rounded corners */
+    border: 1px solid var(--border); /* Border color from theme */
+    font-size: 1rem; /* Font size for text */
+    background-color: var(--card-bg); /* Background color from theme */
+    color: var(--text); /* Text color from theme */
+}
+
+/* Date input field styling */
+.input[type="date"] {
+    color: var(--text); /* Text color from theme */
+}
+
+/* Button styling */
+.button {
+    background-color: var(--button-bg); /* Button background color from theme */
+    color: var(--button-text); /* Button text color from theme */
+    border: 1px solid var(--border); /* Border color from theme */
+    padding: 0.75rem 1.5rem; /* Padding inside the button */
+    border-radius: 6px; /* Rounded corners */
+    font-size: 1rem; /* Font size for button text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.2s; /* Smooth transition for hover effects */
+}
+
+/* Button hover effect */
+.button:hover {
+    background-color: var(--link-hover); /* Change background color on hover */
+}

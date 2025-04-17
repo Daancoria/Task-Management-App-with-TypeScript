@@ -1,0 +1,89 @@
+/* Navbar container styling */
+.navbar {
+    background-color: var(--card-bg); /* Background color from theme */
+    padding: 1rem 2rem; /* Padding around the navbar */
+    border-bottom: 1px solid var(--border); /* Bottom border for separation */
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space between left and right sections */
+    align-items: center; /* Center items vertically */
+    position: sticky; /* Stick the navbar to the top of the viewport */
+    top: 0; /* Position at the top */
+    z-index: 100; /* Ensure it stays above other elements */
+    color: var(--text); /* Text color from theme */
+}
+
+/* Left section of the navbar */
+.left {
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center items vertically */
+    gap: 1rem; /* Space between items */
+}
+
+/* Right section of the navbar */
+.right {
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center items vertically */
+    gap: 1rem; /* Space between items */
+}
+
+/* Logo styling */
+.logo {
+    font-weight: bold; /* Bold font for emphasis */
+    font-size: 1.25rem; /* Slightly larger font size */
+    color: var(--link); /* Link color from theme */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Brand text styling */
+.brand {
+    color: var(--text); /* Text color from theme */
+}
+
+/* Link styling */
+.link {
+    text-decoration: none; /* Remove underline */
+    color: var(--text); /* Text color from theme */
+    font-weight: 500; /* Medium font weight */
+}
+
+/* Link hover effect */
+.link:hover {
+    color: var(--link-hover); /* Change color on hover */
+}
+
+/* User info styling */
+.user {
+    font-size: 0.95rem; /* Slightly smaller font size */
+    color: var(--text); /* Text color from theme */
+}
+
+/* Logout button styling */
+.logout {
+    background-color: var(--button-bg); /* Button background color from theme */
+    color: var(--button-text); /* Button text color from theme */
+    border: 1px solid var(--border); /* Border color from theme */
+    padding: 0.5rem 1rem; /* Padding inside the button */
+    border-radius: 6px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.2s; /* Smooth transition for hover effects */
+}
+
+/* Logout button hover effect */
+.logout:hover {
+    background-color: var(--link-hover); /* Change background color on hover */
+}
+
+/* Theme toggle button styling */
+.themeToggle {
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    font-size: 1.5rem; /* Larger font size for icon */
+    transition: transform 0.2s ease; /* Smooth scaling effect */
+    color: var(--text); /* Text color from theme */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Theme toggle button hover effect */
+.themeToggle:hover {
+    transform: scale(1.15); /* Slightly enlarge the button on hover */
+}

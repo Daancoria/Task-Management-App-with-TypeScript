@@ -1,0 +1,209 @@
+/* Container styling for the dashboard */
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+/* Header section styling */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+/* Title styling */
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Button and clear button styling */
+.button,
+.clear {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Clear button specific styling */
+.clear {
+    background-color: #e53935;
+    color: #fff;
+}
+
+.clear:hover {
+    background-color: #c62828;
+}
+
+/* Controls section for filters and search */
+.controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Search input styling */
+.search {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background-color: var(--card-bg);
+    color: var(--text);
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Dropdown and button styling in controls */
+.controls select,
+.controls button {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background-color: var(--card-bg);
+    color: var(--text);
+    min-width: 160px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.controls button:hover {
+    background-color: var(--button-hover-bg, #ddd);
+}
+
+/* Icon-style utility button */
+.iconButton {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.iconButton:hover {
+    background-color: var(--button-hover-bg, #ddd);
+}
+
+/* Task list styling */
+.taskList {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+/* Individual task item styling */
+.taskItem {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text);
+}
+
+/* Task title styling */
+.taskTitle {
+    font-weight: 600;
+    color: var(--link);
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+/* Metadata styling for tasks */
+.meta {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text);
+}
+
+/* Actions section for task buttons */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Styling for overdue tasks */
+.overdue {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+/* Priority tags styling */
+.priority {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-transform: capitalize;
+    margin-left: 0.5rem;
+}
+
+.priority-low {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.priority-medium {
+    background-color: #fffde7;
+    color: #f9a825;
+}
+
+.priority-high {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* Task count summary styling */
+.summary {
+    text-align: center;
+    margin: 1rem 0;
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 600px) {
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .controls select,
+    .controls input,
+    .controls button {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .actions {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

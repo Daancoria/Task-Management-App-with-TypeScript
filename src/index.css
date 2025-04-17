@@ -1,0 +1,151 @@
+/* Theme variables for light mode */
+:root {
+  --bg: #ffffff; /* Background color */
+  --text: #213547; /* Text color */
+  --card-bg: #ffffff; /* Card background color */
+  --link: #646cff; /* Link color */
+  --link-hover: #535bf2; /* Link hover color */
+  --button-bg: #f9f9f9; /* Button background color */
+  --button-hover-border: #646cff; /* Button hover border color */
+  --button-text: #1a1a1a; /* Button text color */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+}
+
+/* Theme variables for dark mode */
+.dark {
+  --bg: #242424; /* Dark background color */
+  --text: rgba(255, 255, 255, 0.87); /* Light text color */
+  --card-bg: #2a2a2a; /* Dark card background color */
+  --link: #8ab4f8; /* Link color in dark mode */
+  --link-hover: #a8caff; /* Link hover color in dark mode */
+  --button-bg: #1a1a1a; /* Button background color in dark mode */
+  --button-hover-border: #8ab4f8; /* Button hover border color in dark mode */
+  --button-text: #ffffff; /* Button text color in dark mode */
+}
+
+/* Apply theme variables to the body */
+body {
+  background-color: var(--bg); /* Use theme background color */
+  color: var(--text); /* Use theme text color */
+  margin: 0; /* Remove default margin */
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack items vertically */
+  min-width: 320px; /* Minimum width for responsiveness */
+  min-height: 100vh; /* Full viewport height */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; /* Font stack */
+  line-height: 1.5; /* Line height for readability */
+  font-weight: 400; /* Normal font weight */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+}
+
+/* Link styling */
+a {
+  font-weight: 500; /* Medium font weight */
+  color: var(--link); /* Use theme link color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+a:hover {
+  color: var(--link-hover); /* Change color on hover */
+}
+
+/* Heading styling */
+h1 {
+  font-size: 3.2em; /* Large font size */
+  line-height: 1.1; /* Tight line height */
+}
+
+/* Button styling */
+button {
+  border-radius: 8px; /* Rounded corners */
+  border: 1px solid transparent; /* Transparent border */
+  padding: 0.6em 1.2em; /* Padding inside the button */
+  font-size: 1em; /* Font size */
+  font-weight: 500; /* Medium font weight */
+  background-color: var(--button-bg); /* Button background color */
+  color: var(--button-text); /* Button text color */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
+}
+
+button:hover {
+  border-color: var(--button-hover-border); /* Change border color on hover */
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color; /* Focus outline for accessibility */
+}
+
+/* Input, textarea, and select field styling */
+input,
+textarea,
+select {
+  background-color: var(--card-bg); /* Use theme card background color */
+  color: var(--text); /* Use theme text color */
+  border: 1px solid var(--button-hover-border); /* Border color */
+  padding: 0.5rem; /* Padding inside the fields */
+  border-radius: 6px; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
+}
+
+/* Disable system preference override */
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light; /* Force light color scheme */
+  }
+}
+
+/* Dark mode overrides for react-big-calendar */
+.dark .rbc-calendar,
+.dark .rbc-month-view,
+.dark .rbc-time-view,
+.dark .rbc-agenda-view {
+  background-color: var(--bg); /* Use dark mode background color */
+  color: var(--text); /* Use dark mode text color */
+}
+
+.dark .rbc-header {
+  background-color: var(--card-bg); /* Header background color */
+  color: var(--text); /* Header text color */
+  border-bottom: 1px solid var(--border, #444); /* Header border */
+}
+
+.dark .rbc-toolbar button {
+  background-color: var(--button-bg); /* Toolbar button background */
+  color: var(--text); /* Toolbar button text color */
+  border: 1px solid var(--border, #444); /* Toolbar button border */
+}
+
+.dark .rbc-toolbar button:hover,
+.dark .rbc-toolbar button.rbc-active {
+  background-color: var(--button-hover-bg, #4caf50); /* Hover/active background */
+  color: #fff; /* Hover/active text color */
+}
+
+.dark .rbc-today {
+  background-color: rgba(76, 175, 80, 0.1); /* Highlight for today */
+}
+
+.dark .rbc-selected-cell {
+  background-color: rgba(255, 255, 255, 0.1); /* Highlight for selected cells */
+}
+
+.dark .rbc-off-range-bg {
+  background-color: #1a1a1a; /* Background for off-range cells */
+}
+
+.dark .rbc-off-range {
+  color: #777 !important; /* Text color for off-range cells */
+}
+
+.dark .rbc-event {
+  background-color: var(--accent, #4caf50); /* Event background color */
+  color: white; /* Event text color */
+  border: none; /* Remove border */
+  font-size: 0.85rem; /* Font size for events */
+  padding: 2px 6px; /* Padding inside events */
+  border-radius: 4px; /* Rounded corners for events */
+}

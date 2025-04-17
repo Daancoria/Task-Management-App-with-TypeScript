@@ -1,0 +1,45 @@
+/* Container styling for the task details page */
+.container {
+    max-width: 700px; /* Limit the width of the container */
+    margin: 2rem auto; /* Center the container with vertical spacing */
+    padding: 2rem; /* Add padding inside the container */
+    background-color: var(--card-bg); /* Background color from theme */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: var(--text); /* Text color from theme */
+}
+
+/* Title styling */
+.title {
+    font-size: 1.75rem; /* Large font size for the title */
+    margin-bottom: 1rem; /* Space below the title */
+    color: var(--text); /* Text color from theme */
+}
+
+/* Metadata styling for task details */
+.meta {
+    margin: 0.5rem 0; /* Vertical spacing between metadata items */
+    font-size: 0.95rem; /* Slightly smaller font size */
+    color: var(--text); /* Text color from theme */
+}
+
+/* Link styling for navigation or actions */
+.link {
+    display: inline-block; /* Treat the link as a block for spacing */
+    margin-top: 1rem; /* Space above the link */
+    color: var(--link); /* Link color from theme */
+    text-decoration: none; /* Remove underline */
+    font-weight: 500; /* Medium font weight */
+}
+
+/* Link hover effect */
+.link:hover {
+    color: var(--link-hover); /* Change color on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Styling for overdue tasks */
+.overdue {
+    color: #d32f2f; /* Red color to indicate overdue */
+    font-weight: bold; /* Bold font for emphasis */
+}
