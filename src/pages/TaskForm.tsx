@@ -137,11 +137,11 @@ const TaskForm: React.FC = () => {
 
           <label>Reminder (minutes before due):</label>
           <input
-            type="number"
-            className={styles.input}
-            placeholder="e.g. 15"
-            value={reminderMinutesBefore}
-            onChange={(e) => setReminderMinutesBefore(parseInt(e.target.value) || 0)}
+          type="number"
+          className={styles.input}
+          placeholder="e.g. 15"
+          value={reminderMinutesBefore}
+          onChange={(e) => setReminderMinutesBefore(e.target.valueAsNumber || 0)}
           />
 
           <label>Estimated Time (minutes):</label>
@@ -150,7 +150,7 @@ const TaskForm: React.FC = () => {
             className={styles.input}
             placeholder="e.g. 60"
             value={estimatedTimeMinutes}
-            onChange={(e) => setEstimatedTimeMinutes(parseInt(e.target.value) || 0)}
+            onChange={(e) => setEstimatedTimeMinutes(e.target.valueAsNumber || 0)}
           />
 
           <label>Notes (optional):</label>
