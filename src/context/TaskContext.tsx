@@ -1,31 +1,64 @@
 import { useState, useEffect, ReactNode } from 'react';
 import { Task } from '../types';
 import { TaskContext } from './TaskContextObject';
-
-
-const STORAGE_KEY = 'task-manager-tasks';
+import { auth, db } from '../firebase';
+import {
+  collection,
+  doc,
+  onSnapshot,
+  setDoc,
+  deleteDoc,
+} from 'firebase/firestore';
 
 export const TaskProvider = ({ children }: { children: ReactNode }) => {
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
-  });
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-  }, [tasks]);
+    const user = auth.currentUser;
+    if (!user) return;
 
-  const addTask = (task: Task) => setTasks((prev) => [...prev, task]);
+    const tasksRef = collection(db, 'users', user.uid, 'tasks');
 
-  const updateTask = (updatedTask: Task) =>
-    setTasks((prev) =>
-      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+    const unsubscribe = onSnapshot(tasksRef, (snapshot) => {
+      const loadedTasks = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...(doc.data() as Omit<Task, 'id'>),
+      }));
+      setTasks(loadedTasks);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const addTask = async (task: Task) => {
+    const user = auth.currentUser;
+    if (!user) return;
+    const taskRef = doc(db, 'users', user.uid, 'tasks', task.id);
+    await setDoc(taskRef, task);
+  };
+
+  const updateTask = async (updatedTask: Task) => {
+    const user = auth.currentUser;
+    if (!user) return;
+    const taskRef = doc(db, 'users', user.uid, 'tasks', updatedTask.id);
+    await setDoc(taskRef, updatedTask, { merge: true });
+  };
+
+  const deleteTask = async (id: string) => {
+    const user = auth.currentUser;
+    if (!user) return;
+    const taskRef = doc(db, 'users', user.uid, 'tasks', id);
+    await deleteDoc(taskRef);
+  };
+
+  const clearAllTasks = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+    const tasksToDelete = tasks.map((task) =>
+      deleteDoc(doc(db, 'users', user.uid, 'tasks', task.id))
     );
-
-  const deleteTask = (id: string) =>
-    setTasks((prev) => prev.filter((task) => task.id !== id));
-
-  const clearAllTasks = () => setTasks([]);
+    await Promise.all(tasksToDelete);
+  };
 
   return (
     <TaskContext.Provider
