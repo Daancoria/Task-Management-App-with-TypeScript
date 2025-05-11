@@ -10,7 +10,7 @@ import CalendarPage from './pages/CalendarPage';
 
 import PrivateRoute from './components/PrivateRoute';
 
-import './styles/App.css'; // ✅ Add responsive CSS here
+import './App.css'; // ✅ Add responsive CSS here
 
 function URLHandler() {
   const location = useLocation();
