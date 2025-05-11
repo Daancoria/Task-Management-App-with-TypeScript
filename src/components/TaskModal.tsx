@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTaskContext } from '../context/TaskContext';
+import { useTaskContext } from '../hooks/useTaskContext';
+
 import { Task } from '../types';
 import styles from '../styles/TaskModal.module.css';
 import { v4 as uuidv4 } from 'uuid';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useTaskContext } from '../context/TaskContext';
+import { useTaskContext } from '../hooks/useTaskContext';
+
 import NavBar from '../components/NavBar';
 import styles from '../styles/TaskDetails.module.css';
 

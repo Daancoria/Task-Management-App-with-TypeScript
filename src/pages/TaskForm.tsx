@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useTaskContext } from '../context/TaskContext';
+import { useTaskContext } from '../hooks/useTaskContext';
+
 import { Task, Subtask, Recurrence } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 import NavBar from '../components/NavBar';
@@ -37,9 +38,16 @@ const TaskForm: React.FC = () => {
   };
 
   // Update a specific field of a subtask
-  const handleSubtaskChange = (index: number, field: 'title' | 'completed', value: string | boolean) => {
+  const handleSubtaskChange = (
+    index: number,
+    field: 'title' | 'completed',
+    value: string | boolean
+  ) => {
     const newSubtasks = [...subtasks];
-    (newSubtasks[index] as any)[field] = value;
+    newSubtasks[index] = {
+      ...newSubtasks[index],
+      [field]: value,
+    };
     setSubtasks(newSubtasks);
   };
 

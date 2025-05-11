@@ -1,7 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { useTaskContext } from '../context/TaskContext';
+import { useTaskContext } from '../hooks/useTaskContext';
+
 import NavBar from '../components/NavBar';
 import styles from '../styles/Dashboard.module.css';
 import { Task } from '../types';
@@ -144,21 +145,42 @@ const Dashboard: React.FC = () => {
             className={styles.search}
           />
 
-          <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value as any)}>
+          <select
+            value={filterStatus}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setFilterStatus(e.target.value as "all" | "pending" | "in-progress" | "completed")
+            }
+          >
             <option value="all">All Statuses</option>
             <option value="pending">Pending</option>
             <option value="in-progress">In Progress</option>
             <option value="completed">Completed</option>
           </select>
 
-          <select value={priorityFilter} onChange={(e) => setPriorityFilter(e.target.value as any)}>
+          <select
+            value={priorityFilter}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setPriorityFilter(e.target.value as "all" | "high" | "medium" | "low")
+            }
+          >
             <option value="all">All Priorities</option>
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
           </select>
 
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)}>
+          <select
+            value={sortBy}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setSortBy(
+                e.target.value as
+                  | "title-asc"
+                  | "title-desc"
+                  | "due-asc"
+                  | "due-desc"
+              )
+            }
+          >
             <option value="title-asc">Title A–Z</option>
             <option value="title-desc">Title Z–A</option>
             <option value="due-asc">Due Date: Earliest</option>
