@@ -1,7 +1,7 @@
 import { useState, useEffect, ReactNode } from 'react';
 import { Task } from '../types';
 import { TaskContext } from './TaskContextObject';
-import { auth, db } from '../firebase';
+import { db } from '../firebase';
 import {
   collection,
   doc,
@@ -9,15 +9,19 @@ import {
   setDoc,
   deleteDoc,
 } from 'firebase/firestore';
+import { useAuth0 } from '@auth0/auth0-react';
+
 
 export const TaskProvider = ({ children }: { children: ReactNode }) => {
+  const { user, isAuthenticated } = useAuth0();
   const [tasks, setTasks] = useState<Task[]>([]);
 
+  // Real-time sync
   useEffect(() => {
-    const user = auth.currentUser;
-    if (!user) return;
+    const uid = user?.sub || user?.email;
+    if (!isAuthenticated || !uid) return;
 
-    const tasksRef = collection(db, 'users', user.uid, 'tasks');
+    const tasksRef = collection(db, 'users', uid, 'tasks');
 
     const unsubscribe = onSnapshot(tasksRef, (snapshot) => {
       const loadedTasks = snapshot.docs.map((doc) => ({
@@ -28,41 +32,48 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [isAuthenticated, user]);
 
   const addTask = async (task: Task) => {
-    const user = auth.currentUser;
-    if (!user) return;
-    const taskRef = doc(db, 'users', user.uid, 'tasks', task.id);
+    const uid = user?.sub || user?.email;
+    if (!uid) return;
+    const taskRef = doc(db, 'users', uid, 'tasks', task.id);
     await setDoc(taskRef, task);
   };
 
   const updateTask = async (updatedTask: Task) => {
-    const user = auth.currentUser;
-    if (!user) return;
-    const taskRef = doc(db, 'users', user.uid, 'tasks', updatedTask.id);
+    const uid = user?.sub || user?.email;
+    if (!uid) return;
+    const taskRef = doc(db, 'users', uid, 'tasks', updatedTask.id);
     await setDoc(taskRef, updatedTask, { merge: true });
   };
 
   const deleteTask = async (id: string) => {
-    const user = auth.currentUser;
-    if (!user) return;
-    const taskRef = doc(db, 'users', user.uid, 'tasks', id);
+    const uid = user?.sub || user?.email;
+    if (!uid) return;
+    const taskRef = doc(db, 'users', uid, 'tasks', id);
     await deleteDoc(taskRef);
   };
 
   const clearAllTasks = async () => {
-    const user = auth.currentUser;
-    if (!user) return;
-    const tasksToDelete = tasks.map((task) =>
-      deleteDoc(doc(db, 'users', user.uid, 'tasks', task.id))
+    const uid = user?.sub || user?.email;
+    if (!uid) return;
+    const deletions = tasks.map((task) =>
+      deleteDoc(doc(db, 'users', uid, 'tasks', task.id))
     );
-    await Promise.all(tasksToDelete);
+    await Promise.all(deletions);
   };
 
   return (
     <TaskContext.Provider
-      value={{ tasks, addTask, updateTask, deleteTask, clearAllTasks }}
+      value={{
+        tasks,
+        addTask,
+        updateTask,
+        deleteTask,
+        clearAllTasks,
+        currentUser: user ?? null, // ✅ Type-safe fallback
+      }}
     >
       {children}
     </TaskContext.Provider>
