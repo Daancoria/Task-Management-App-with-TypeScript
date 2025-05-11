@@ -1,13 +1,22 @@
-import React, { useMemo, useState } from 'react';
-import { Calendar, dateFnsLocalizer, View } from 'react-big-calendar';
-import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
+import { useMemo, useState } from 'react';
+import {
+  Calendar,
+  dateFnsLocalizer,
+  View,
+  SlotInfo,
+} from 'react-big-calendar';
+import withDragAndDrop, {
+  EventInteractionArgs,
+} from 'react-big-calendar/lib/addons/dragAndDrop';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 
-import { useTaskContext } from '../context/TaskContext';
+import { useTaskContext } from '../hooks/useTaskContext';
+import { Task } from '../types';
+
 import NavBar from '../components/NavBar';
 import styles from '../styles/CalendarPage.module.css';
 import TaskModal from '../components/TaskModal';
@@ -15,7 +24,6 @@ import { useNavigate } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-// Localization setup for the calendar using date-fns
 const locales = { 'en-US': enUS };
 
 const localizer = dateFnsLocalizer({
@@ -26,22 +34,29 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-// Enable drag-and-drop functionality for the calendar
-const DragAndDropCalendar = withDragAndDrop(Calendar);
+interface CalendarEvent {
+  id: string;
+  title: string;
+  start: Date;
+  end: Date;
+  allDay: boolean;
+  priority: 'low' | 'medium' | 'high';
+  resource: Task;
+}
+
+const DragAndDropCalendar = withDragAndDrop<CalendarEvent, object>(Calendar);
 
 const CalendarPage: React.FC = () => {
-  const { tasks, updateTask } = useTaskContext(); // Access tasks and updateTask function from context
-  const navigate = useNavigate(); // React Router hook for navigation
+  const { tasks, updateTask } = useTaskContext();
+  const navigate = useNavigate();
 
-  // State variables for managing calendar view, selected date, modal visibility, and floating menu
   const [view, setView] = useState<View>('month');
   const [viewDate, setViewDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
   const [modalDate, setModalDate] = useState<string | undefined>();
   const [showMenu, setShowMenu] = useState(false);
 
-  // Map tasks to calendar events
-  const events = useMemo(
+  const events = useMemo<CalendarEvent[]>(
     () =>
       tasks.map((task) => ({
         id: task.id,
@@ -55,27 +70,24 @@ const CalendarPage: React.FC = () => {
     [tasks]
   );
 
-  // Handle event selection (navigate to task details)
-  const handleSelectEvent = (event: any) => {
+  const handleSelectEvent = (event: CalendarEvent) => {
     navigate(`/task/${event.id}`);
   };
 
-  // Handle slot selection (open modal for creating a task)
-  const handleSelectSlot = (slotInfo: any) => {
-    const date = slotInfo.start.toISOString().split('T')[0];
+  const handleSelectSlot = (slotInfo: SlotInfo) => {
+    const date = new Date(slotInfo.start as Date).toISOString().split('T')[0];
     setModalDate(date);
     setShowModal(true);
     setShowMenu(false);
   };
 
-  // Handle event drag-and-drop (update task due date)
-  const handleEventDrop = ({ event, start }: any) => {
-    const updated = { ...event.resource, dueDate: start.toISOString() };
+  const handleEventDrop = (args: EventInteractionArgs<CalendarEvent>) => {
+    const { event, start } = args;
+    const updated = { ...event.resource, dueDate: new Date(start).toISOString() };
     updateTask(updated);
   };
 
-  // Customize event styles based on priority
-  const eventStyleGetter = (event: any) => {
+  const eventStyleGetter = (event: CalendarEvent) => {
     let backgroundColor = '#888';
     if (event.priority === 'high') backgroundColor = '#c62828';
     else if (event.priority === 'medium') backgroundColor = '#f9a825';
@@ -95,18 +107,16 @@ const CalendarPage: React.FC = () => {
 
   return (
     <>
-      {/* Navigation bar */}
       <NavBar />
       <div className={styles.container}>
         <h1>📅 Calendar</h1>
 
-        {/* Drag-and-drop calendar */}
         <DndProvider backend={HTML5Backend}>
           <DragAndDropCalendar
             localizer={localizer}
             events={events}
-            startAccessor="start"
-            endAccessor="end"
+            startAccessor={(event) => event.start}
+            endAccessor={(event) => event.end}
             selectable
             view={view}
             onView={setView}
@@ -126,7 +136,6 @@ const CalendarPage: React.FC = () => {
           />
         </DndProvider>
 
-        {/* Task creation modal */}
         {showModal && (
           <TaskModal
             onClose={() => {
@@ -137,21 +146,18 @@ const CalendarPage: React.FC = () => {
           />
         )}
 
-        {/* Floating action menu */}
         <div className={styles.floatingMenu}>
           {showMenu && (
-            <>
-              <button
-                className={styles.fabOption}
-                onClick={() => {
-                  setModalDate(undefined);
-                  setShowModal(true);
-                  setShowMenu(false);
-                }}
-              >
-                ➕ Add Task
-              </button>
-            </>
+            <button
+              className={styles.fabOption}
+              onClick={() => {
+                setModalDate(undefined);
+                setShowModal(true);
+                setShowMenu(false);
+              }}
+            >
+              ➕ Add Task
+            </button>
           )}
 
           <button
