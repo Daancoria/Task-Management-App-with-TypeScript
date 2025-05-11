@@ -25,7 +25,6 @@ const TaskForm: React.FC = () => {
   const [notes, setNotes] = useState(existingTask?.notes || '');
   const [subtasks, setSubtasks] = useState<Subtask[]>(existingTask?.subtasks || []);
 
-  // ✅ Check localStorage for prefill task title if creating a new task
   useEffect(() => {
     if (!existingTask) {
       const saved = localStorage.getItem('prefillTaskData');
@@ -42,12 +41,11 @@ const TaskForm: React.FC = () => {
           setNotes(parsed.notes || '');
         } catch {
           console.warn('Invalid task prefill data');
-        }        
+        }
         localStorage.removeItem('prefillTaskData');
       }
     }
   }, [existingTask]);
-  
 
   const handleAddSubtask = () => {
     setSubtasks([...subtasks, { id: uuidv4(), title: '', completed: false }]);
@@ -102,94 +100,95 @@ const TaskForm: React.FC = () => {
   return (
     <>
       <NavBar />
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h1>{existingTask ? 'Edit Task' : 'Create Task'}</h1>
+      <div className="task-form">
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <h1>{existingTask ? 'Edit Task' : 'Create Task'}</h1>
 
-        <label>Title:</label>
-        <input className={styles.input} value={title} onChange={(e) => setTitle(e.target.value)} required />
+          <label>Title:</label>
+          <input className={styles.input} value={title} onChange={(e) => setTitle(e.target.value)} required />
 
-        <label>Description:</label>
-        <textarea className={styles.textarea} value={description} onChange={(e) => setDescription(e.target.value)} required />
+          <label>Description:</label>
+          <textarea className={styles.textarea} value={description} onChange={(e) => setDescription(e.target.value)} required />
 
-        <label>Status:</label>
-        <select className={styles.select} value={status} onChange={(e) => setStatus(e.target.value as Task['status'])}>
-          <option value="pending">Pending</option>
-          <option value="in-progress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
+          <label>Status:</label>
+          <select className={styles.select} value={status} onChange={(e) => setStatus(e.target.value as Task['status'])}>
+            <option value="pending">Pending</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
 
-        <label>Priority:</label>
-        <select className={styles.select} value={priority} onChange={(e) => setPriority(e.target.value as Task['priority'])}>
-          <option value="low">🟢 Low</option>
-          <option value="medium">🟡 Medium</option>
-          <option value="high">🔴 High</option>
-        </select>
+          <label>Priority:</label>
+          <select className={styles.select} value={priority} onChange={(e) => setPriority(e.target.value as Task['priority'])}>
+            <option value="low">🟢 Low</option>
+            <option value="medium">🟡 Medium</option>
+            <option value="high">🔴 High</option>
+          </select>
 
-        <label>Due Date:</label>
-        <input type="date" className={styles.input} value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+          <label>Due Date:</label>
+          <input type="date" className={styles.input} value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
 
-        <label>Recurrence:</label>
-        <select className={styles.select} value={recurrence} onChange={(e) => setRecurrence(e.target.value as Recurrence)}>
-          <option value="none">Does not repeat</option>
-          <option value="daily">Daily</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
-        </select>
+          <label>Recurrence:</label>
+          <select className={styles.select} value={recurrence} onChange={(e) => setRecurrence(e.target.value as Recurrence)}>
+            <option value="none">Does not repeat</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
 
-        <label>Reminder (minutes before due):</label>
-        <input
-          type="number"
-          className={styles.input}
-          placeholder="e.g. 15"
-          value={reminderMinutesBefore}
-          onChange={(e) => setReminderMinutesBefore(parseInt(e.target.value) || 0)}
-        />
+          <label>Reminder (minutes before due):</label>
+          <input
+            type="number"
+            className={styles.input}
+            placeholder="e.g. 15"
+            value={reminderMinutesBefore}
+            onChange={(e) => setReminderMinutesBefore(parseInt(e.target.value) || 0)}
+          />
 
-        <label>Estimated Time (minutes):</label>
-        <input
-          type="number"
-          className={styles.input}
-          placeholder="e.g. 60"
-          value={estimatedTimeMinutes}
-          onChange={(e) => setEstimatedTimeMinutes(parseInt(e.target.value) || 0)}
-        />
+          <label>Estimated Time (minutes):</label>
+          <input
+            type="number"
+            className={styles.input}
+            placeholder="e.g. 60"
+            value={estimatedTimeMinutes}
+            onChange={(e) => setEstimatedTimeMinutes(parseInt(e.target.value) || 0)}
+          />
 
-        <label>Notes (optional):</label>
-        <textarea
-          className={styles.textarea}
-          placeholder="Add any extra info here..."
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-        />
+          <label>Notes (optional):</label>
+          <textarea
+            className={styles.textarea}
+            placeholder="Add any extra info here..."
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          />
 
-        <div style={{ marginTop: '1rem' }}>
-          <h3>Subtasks</h3>
-          {subtasks.map((subtask, index) => (
-            <div key={subtask.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <input
-                className={styles.input}
-                placeholder="Subtask title"
-                value={subtask.title}
-                onChange={(e) => handleSubtaskChange(index, 'title', e.target.value)}
-              />
-              <input
-                type="checkbox"
-                checked={subtask.completed}
-                onChange={(e) => handleSubtaskChange(index, 'completed', e.target.checked)}
-                style={{ marginLeft: '0.5rem' }}
-              />
-              <button type="button" onClick={() => handleRemoveSubtask(index)} style={{ marginLeft: '0.5rem' }}>
-                🗑
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={handleAddSubtask} className={styles.button}>
-            + Add Subtask
-          </button>
-        </div>
+          <div style={{ marginTop: '1rem' }}>
+            <h3>Subtasks</h3>
+            {subtasks.map((subtask, index) => (
+              <div key={subtask.id} className={styles.subtaskRow}>
+                <input
+                  className={styles.input}
+                  placeholder="Subtask title"
+                  value={subtask.title}
+                  onChange={(e) => handleSubtaskChange(index, 'title', e.target.value)}
+                />
+                <input
+                  type="checkbox"
+                  checked={subtask.completed}
+                  onChange={(e) => handleSubtaskChange(index, 'completed', e.target.checked)}
+                />
+                <button type="button" onClick={() => handleRemoveSubtask(index)} className={styles.subtaskDelete}>
+                  🗑
+                </button>
+              </div>
+            ))}
+            <button type="button" onClick={handleAddSubtask} className={styles.button}>
+              + Add Subtask
+            </button>
+          </div>
 
-        <button type="submit" className={styles.button}>Save</button>
-      </form>
+          <button type="submit" className={styles.button}>Save</button>
+        </form>
+      </div>
     </>
   );
 };

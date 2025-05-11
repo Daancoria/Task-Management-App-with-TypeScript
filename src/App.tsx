@@ -10,6 +10,8 @@ import CalendarPage from './pages/CalendarPage';
 
 import PrivateRoute from './components/PrivateRoute';
 
+import './styles/App.css'; // ✅ Add responsive CSS here
+
 function URLHandler() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -36,20 +38,14 @@ function URLHandler() {
   return null;
 }
 
-
-// Main App component
 function App() {
   return (
     <>
       <Router>
-        {/* Checks URL params and handles redirect */}
         <URLHandler />
 
         <Routes>
-          {/* Public route for the login page */}
           <Route path="/login" element={<LoginPage />} />
-
-          {/* Private routes */}
           <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path="/task/new" element={<PrivateRoute><TaskForm /></PrivateRoute>} />
           <Route path="/task/:id/edit" element={<PrivateRoute><TaskForm /></PrivateRoute>} />
